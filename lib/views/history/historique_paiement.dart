@@ -270,7 +270,7 @@ class _HistoriqueState extends State<Historique> {
           return Padding(
             padding: EdgeInsets.symmetric(
                 vertical: MediaQuery.of(context).size.height * 0.4),
-            child: const Center(child: Text('Aucune transaction trouvée')),
+            child: const Center(child: Text('Vos récentes transactions apparaîtront ici')),
           );
         }
       },

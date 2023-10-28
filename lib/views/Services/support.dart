@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:get/get.dart';
 
 import '../../controllers/c_user.dart';
 
@@ -24,12 +23,12 @@ class _SupportState extends State<Support> {
   }
 
   Future<void> openWhatsappSuppport() async {
-    var whatsappTel = "+2250757838498";
+    var whatsappTel = "+2250566223400";
 
     Uri whatsappURlAndroid = Uri.parse(
-        "https://wa.me/$whatsappTel?text=${Uri.parse("Bonjour, Pouvez-vous m'aider svp ? mon nom c'est ${_cUser.user.nom} ${_cUser.user.prenom}. L'école est : Leaders International Academy")}");
+        "https://wa.me/$whatsappTel?text=${Uri.parse("Bonjour, Pouvez-vous m'aider svp ? mon nom c'est ${_cUser.user.nom} ${_cUser.user.prenom}")}");
     var whatappURLIos = Uri.parse(
-        "https://wa.me/$whatsappTel?text=${Uri.parse("Bonjour, Pouvez-vous m'aider svp ? mon nom c'est ${_cUser.user.nom} ${_cUser.user.prenom}. L'école est : Leaders International Academy")}");
+        "https://wa.me/$whatsappTel?text=${Uri.parse("Bonjour, Pouvez-vous m'aider svp ? mon nom c'est ${_cUser.user.nom} ${_cUser.user.prenom}")}");
     if (Platform.isIOS) {
       // for iOS phone only
       if (!await launchUrl(
@@ -58,7 +57,7 @@ class _SupportState extends State<Support> {
   }
 
   Future<void> _launchTel() async {
-    final Uri url = Uri.parse('tel:+2252722265290');
+    final Uri url = Uri.parse('tel:+2250566223400');
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
     }
@@ -66,7 +65,7 @@ class _SupportState extends State<Support> {
 
   Future<void> _launchMail() async {
     final Uri _url = Uri.parse(
-        "mailto:infos@lkmdigital.ci?subject=Demande d'assistance&body=Bonjour ");
+        "mailto:contact@edupay.com?subject=Demande d'assistance&body=Bonjour ");
     if (!await launchUrl(_url)) {
       throw Exception('Could not launch $_url');
     }
@@ -157,7 +156,7 @@ class _SupportState extends State<Support> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AutoSizeText(
-                        "by LKM DIGITAL",
+                        "Propulsé par MetaTech",
                         style: Theme.of(this.context).textTheme.bodySmall,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -256,7 +255,7 @@ class _SupportState extends State<Support> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '+225 27 22 26 52 90',
+                                          '+225 05 66 22 34 00',
                                           style: Theme.of(this.context)
                                               .textTheme
                                               .titleLarge,
@@ -291,7 +290,7 @@ class _SupportState extends State<Support> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         AutoSizeText(
-                                          'infos@lkmdigital.ci',
+                                          'contact@edupay.com',
                                           style: Theme.of(this.context)
                                               .textTheme
                                               .titleLarge,
@@ -333,7 +332,7 @@ class _SupportState extends State<Support> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    _launchFeedback();
+                                    // _launchFeedback();
                                   },
                                   child: ListTile(
                                     leading: const CircleAvatar(
@@ -368,7 +367,7 @@ class _SupportState extends State<Support> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    _launchRating();
+                                    // _launchRating();
                                   },
                                   child: ListTile(
                                     leading: const CircleAvatar(
@@ -416,7 +415,7 @@ class _SupportState extends State<Support> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    _launchFacebook();
+                                    // _launchFacebook();
                                   },
                                   child: Container(
                                     height: size.height * 0.1,
@@ -438,7 +437,7 @@ class _SupportState extends State<Support> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    _launchLinkedin();
+                                    // _launchLinkedin();
                                   },
                                   child: Container(
                                     height: size.height * 0.1,
@@ -460,7 +459,7 @@ class _SupportState extends State<Support> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    _launchWhatsapp();
+                                    // _launchWhatsapp();
                                   },
                                   child: Container(
                                     height: size.height * 0.1,

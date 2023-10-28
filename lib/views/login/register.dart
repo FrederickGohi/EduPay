@@ -501,9 +501,10 @@ class _RegisterState extends State<Register> {
                       ),
                       child: InkWell(
                         onTap: (() {
-                          if (_formKey.currentState!.validate()) {
-                            isLoading ? null : _onSubmit();
-                          }
+                          Get.offAll(() => const Root());
+                          // if (_formKey.currentState!.validate()) {
+                          //   isLoading ? null : _onSubmit();
+                          // }
                         }),
                         child: isLoading
                             ? Center(

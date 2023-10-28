@@ -155,10 +155,53 @@ class _AccueilState extends State<Accueil> {
                       imageAssetPath: 'assets/images/ufhb.png',
                       title: "Université\n FHB",
                       onTap: () {
-                        // Get.to(
-                        //     () => const AutreMontant(
-                        //         title: "Offrande de mission"),
-                        //     fullscreenDialog: true);
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            TextEditingController matriculeController =
+                                TextEditingController(); // Contrôleur pour le champ de saisie du matricule
+
+                            return StatefulBuilder(
+                              builder: (context, setState) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Saisissez le matricule',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        controller: matriculeController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Matricule',
+                                          hintText: 'Ex : 848455J',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Annuler"),
+                                    ),
+                                    FilledButton(
+                                        onPressed: () {
+                                          String matricule =
+                                              matriculeController.text;
+                                          Get.to(
+                                              () => const PaymentProcessing());
+                                        },
+                                        child: const Text('Rechercher')),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                     ),
                     CustomCardWidget(
@@ -186,7 +229,7 @@ class _AccueilState extends State<Accueil> {
                                         controller: matriculeController,
                                         decoration: const InputDecoration(
                                           labelText: 'Matricule',
-                                          hintText: 'Entrez le matricule',
+                                          hintText: 'Ex : 848455J',
                                         ),
                                       ),
                                     ],
@@ -203,7 +246,8 @@ class _AccueilState extends State<Accueil> {
                                           String matricule =
                                               matriculeController.text;
                                           // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
-                                          Get.to(() => const PaymentProcessing());
+                                          Get.to(
+                                              () => const PaymentProcessing());
                                         },
                                         child: const Text('Rechercher')),
                                   ],
@@ -218,39 +262,216 @@ class _AccueilState extends State<Accueil> {
                       imageAssetPath: 'assets/images/inp.png',
                       title: "INPHB",
                       onTap: () {
-                        // Get.to(
-                        //     () => const AutreMontant(title: "Actions sociales"),
-                        //     fullscreenDialog: true);
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            TextEditingController matriculeController =
+                                TextEditingController(); // Contrôleur pour le champ de saisie du matricule
+
+                            return StatefulBuilder(
+                              builder: (context, setState) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Saisissez le matricule',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        controller: matriculeController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Matricule',
+                                          hintText: 'Ex : 848455J',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Annuler"),
+                                    ),
+                                    FilledButton(
+                                        onPressed: () {
+                                          String matricule =
+                                              matriculeController.text;
+                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
+                                          Get.to(
+                                              () => const PaymentProcessing());
+                                        },
+                                        child: const Text('Rechercher')),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                     ),
                     CustomCardWidget(
                       imageAssetPath: 'assets/images/esatic.png',
                       title: "ESATIC",
                       onTap: () {
-                        // Get.to(
-                        //     () => const AutreMontant(
-                        //         title: "Travaux du siège Horeb"),
-                        //     fullscreenDialog: true);
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            TextEditingController matriculeController =
+                                TextEditingController(); // Contrôleur pour le champ de saisie du matricule
+
+                            return StatefulBuilder(
+                              builder: (context, setState) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Saisissez le matricule',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        controller: matriculeController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Matricule',
+                                          hintText: 'Ex : 848455J',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Annuler"),
+                                    ),
+                                    FilledButton(
+                                        onPressed: () {
+                                          String matricule =
+                                              matriculeController.text;
+                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
+                                          Get.to(
+                                              () => const PaymentProcessing());
+                                        },
+                                        child: const Text('Rechercher')),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                     ),
                     CustomCardWidget(
                       imageAssetPath: 'assets/images/classic.png',
                       title: "Lycée Classique Abidjan",
                       onTap: () {
-                        // Get.to(
-                        //     () => const AutreMontant(
-                        //         title: "Don pour l'Evangélisation"),
-                        //     fullscreenDialog: true);
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            TextEditingController matriculeController =
+                                TextEditingController(); // Contrôleur pour le champ de saisie du matricule
+
+                            return StatefulBuilder(
+                              builder: (context, setState) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Saisissez le matricule',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        controller: matriculeController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Matricule',
+                                          hintText: 'Ex : 848455J',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Annuler"),
+                                    ),
+                                    FilledButton(
+                                        onPressed: () {
+                                          String matricule =
+                                              matriculeController.text;
+                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
+                                          Get.to(
+                                              () => const PaymentProcessing());
+                                        },
+                                        child: const Text('Rechercher')),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                     ),
                     CustomCardWidget(
                       imageAssetPath: 'assets/images/viateur.png',
                       title: "Collège Saint Viateur",
                       onTap: () {
-                        // Get.to(
-                        //     () => const AutreMontant(
-                        //         title: "Contribution membres"),
-                        //     fullscreenDialog: true);
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            TextEditingController matriculeController =
+                                TextEditingController(); // Contrôleur pour le champ de saisie du matricule
+
+                            return StatefulBuilder(
+                              builder: (context, setState) {
+                                return AlertDialog(
+                                  title: Text(
+                                    'Saisissez le matricule',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        controller: matriculeController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Matricule',
+                                          hintText: 'Ex : 848455J',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Annuler"),
+                                    ),
+                                    FilledButton(
+                                        onPressed: () {
+                                          String matricule =
+                                              matriculeController.text;
+                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
+                                          Get.to(
+                                              () => const PaymentProcessing());
+                                        },
+                                        child: const Text('Rechercher')),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                     ),
                   ],

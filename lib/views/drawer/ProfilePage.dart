@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:edupay/login_register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../constantes/constantes.dart';
 import '../../constantes/metierCore.dart';
 import '../../controllers/c_user.dart';
+import '../Services/support.dart';
 import '../login/login.dart';
 import '../../widgets/event_pref.dart';
 import 'delete_account.dart';
@@ -171,7 +173,7 @@ class _ProfilPage extends State<ProfilPage> {
 
               Future.delayed(const Duration(milliseconds: 1500), () {
                 EventPref.deleteUser().then((value) {
-                  Get.offAll(() => const Login());
+                  Get.offAll(() => const LoginRegister());
                 });
               });
             },
@@ -182,7 +184,10 @@ class _ProfilPage extends State<ProfilPage> {
           )
         ],
         cancelButton: CupertinoActionSheetAction(
-          child: const Text("Annuler", style: TextStyle(color: Colors.blue),),
+          child: const Text(
+            "Annuler",
+            style: TextStyle(color: Colors.blue),
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -216,7 +221,6 @@ class _ProfilPage extends State<ProfilPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Card(
                       elevation: 8.0,
                       child: Container(
@@ -230,15 +234,15 @@ class _ProfilPage extends State<ProfilPage> {
                                 Icons.person,
                                 size: 25,
                               ),
-                              // trailing: IconButton(
-                              //   icon: const Icon(
-                              //     Icons.edit,
-                              //     size: 25,
-                              //   ),
-                              //   onPressed: () {
-                              //     nomUpdateForm();
-                              //   },
-                              // ),
+                              trailing: IconButton(
+                                icon: const Icon(
+                                  Icons.edit,
+                                  size: 25,
+                                ),
+                                onPressed: () {
+                                  nomUpdateForm();
+                                },
+                              ),
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -262,15 +266,15 @@ class _ProfilPage extends State<ProfilPage> {
                                 Icons.person,
                                 size: 25,
                               ),
-                              // trailing: IconButton(
-                              //   icon: const Icon(
-                              //     Icons.edit,
-                              //     size: 25,
-                              //   ),
-                              //   onPressed: () {
-                              //     prenomUpdateForm();
-                              //   },
-                              // ),
+                              trailing: IconButton(
+                                icon: const Icon(
+                                  Icons.edit,
+                                  size: 25,
+                                ),
+                                onPressed: () {
+                                  prenomUpdateForm();
+                                },
+                              ),
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -294,15 +298,15 @@ class _ProfilPage extends State<ProfilPage> {
                                 Icons.email,
                                 size: 25,
                               ),
-                              // trailing: IconButton(
-                              //   icon: const Icon(
-                              //     Icons.edit,
-                              //     size: 25,
-                              //   ),
-                              //   onPressed: () {
-                              //     emailUpdateForm();
-                              //   },
-                              // ),
+                              trailing: IconButton(
+                                icon: const Icon(
+                                  Icons.edit,
+                                  size: 25,
+                                ),
+                                onPressed: () {
+                                  emailUpdateForm();
+                                },
+                              ),
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -343,31 +347,43 @@ class _ProfilPage extends State<ProfilPage> {
                                   )
                                 ],
                               ),
+                              trailing: const Icon(Icons.edit),
                             ),
-                            ListTile(
-                              leading: const Icon(
-                                Icons.lock,
-                                size: 25,
-                              ),
-                              title: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Mot de passe',
-                                    style: Theme.of(this.context)
-                                        .textTheme
-                                        .titleLarge,
-                                  ),
-                                  Text(
-                                    '******',
-                                    style: Theme.of(this.context)
-                                        .textTheme
-                                        .titleMedium,
-                                  )
-                                ],
-                              ),
-                            ),
+                            
                           ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => const Support());
+                      },
+                      child: Card(
+                        elevation: 8.0,
+                        child: Container(
+                          margin: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
+                              // color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(17))),
+                          child: ListTile(
+                            leading: const CircleAvatar(
+                              child: Icon(
+                                Icons.headphones,
+                                size: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                            title: Text(
+                              'Support technique',
+                              style:
+                                  Theme.of(this.context).textTheme.titleLarge,
+                            ),
+                            trailing: const Icon(Icons.chevron_right),
+                          ),
                         ),
                       ),
                     ),

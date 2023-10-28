@@ -1,11 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:edupay/views/Services/mtn_webhook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
-import '../widgets/root.dart';
-import 'Services/paiement.dart';
+import '../constantes/constantes.dart';
 
 class PaymentProcessing extends StatefulWidget {
   const PaymentProcessing({super.key});
@@ -74,21 +73,21 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
   }
 
   Widget controlBuilders(context, details) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
       child: Row(
-        // children: [
-        //   ElevatedButton(
-        //     onPressed: details.onStepContinue,
-        //     child: const Text('Next'),
-        //   ),
-        //   const SizedBox(width: 10),
-        //   OutlinedButton(
-        //     onPressed: details.onStepCancel,
-        //     child: const Text('Back'),
-        //   ),
-        // ],
-      ),
+          // children: [
+          //   ElevatedButton(
+          //     onPressed: details.onStepContinue,
+          //     child: const Text('Next'),
+          //   ),
+          //   const SizedBox(width: 10),
+          //   OutlinedButton(
+          //     onPressed: details.onStepCancel,
+          //     child: const Text('Back'),
+          //   ),
+          // ],
+          ),
     );
   }
 
@@ -117,34 +116,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
 
     return Scaffold(
       floatingActionButton: currentStep == 0
-          ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  continueStep();
-                },
-                style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(
-                    Size(MediaQuery.of(context).size.width, 55),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Theme.of(context).buttonTheme.colorScheme!.primaryContainer,
-                  ), //verifier si la couleur est nul (si oui alors on lui donne la couleur pas defaut)
-                ),
-                child: Text(
-                  'Continuer',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Theme.of(context).buttonTheme.colorScheme!.onPrimary,
-                  ),
-                ),
-              ),
-            )
+          ? null
           : currentStep == 1
               ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -164,7 +136,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
                         : null,
                     style: ButtonStyle(
                       fixedSize: MaterialStateProperty.all(
-                        Size(MediaQuery.of(context).size.width, 55),
+                        Size(MediaQuery.of(context).size.width, 45),
                       ),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
@@ -181,7 +153,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
                           : MaterialStateProperty.all<Color>(Colors.grey),
                     ),
                     child: Text(
-                      'Continuer',
+                      'Valider',
                       style: TextStyle(
                         fontSize: 18,
                         color: Theme.of(context)
@@ -195,19 +167,102 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
               : currentStep == 2
                   ? null
                   : currentStep == 3
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: TextButton(
-                            onPressed: () {
-                              Get.offAll(() => const Root());
-                            },
-                            child: const Text(
-                              'Annuler la transaction',
-                              // Texte pour l'étape 3
+                      ? Column(
+                          children: [
+                            Expanded(child: Container()), // Espace extensible
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Get.off(() => const AwaitWebhook());
+                                  },
+                                  style: ButtonStyle(
+                                      fixedSize: MaterialStateProperty.all(
+                                        Size(MediaQuery.of(context).size.width,
+                                            45),
+                                      ),
+                                      shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                        Theme.of(context)
+                                            .buttonTheme
+                                            .colorScheme!
+                                            .primaryContainer,
+                                      )),
+                                  child: Text(
+                                    'Passer au paiement',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Theme.of(context)
+                                          .buttonTheme
+                                          .colorScheme!
+                                          .onPrimary,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // Votre code ici
+                                  },
+                                  style: ButtonStyle(
+                                    fixedSize: MaterialStateProperty.all(
+                                      Size(MediaQuery.of(context).size.width,
+                                          45),
+                                    ),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Annuler',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      // color: Theme.of(context)
+                                      //     .buttonTheme
+                                      //     .colorScheme!
+                                      //     .primaryContainer,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         )
                       : null,
+
+      // ? Padding(
+      //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      //     child: TextButton(
+      //       onPressed: () {
+      //         Get.offAll(() => const Root());
+      //       },
+      //       child: const Text(
+      //         'Annuler la transaction',
+      //         // Texte pour l'étape 3
+      //       ),
+      //     ),
+      //   )
+      // : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         title: const Text('EduPay'),
@@ -230,45 +285,309 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
                   Step(
                     title: const Text(''),
                     // subtitle: Text('data'),
-                    content: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                            child: Text(
-                          'Identité',
-                          textAlign: TextAlign.center,
-                        )),
-                        Card(
-                          elevation: 5.0,
-                          margin: EdgeInsets.all(16.0),
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ListTile(
-                                  leading: Icon(Icons.person),
-                                  title: Text('Nom: John'),
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.person),
-                                  title: Text('Prénom: Doe'),
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.school),
-                                  title: Text('Classe: 5A'),
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.school),
-                                  title: Text('École: École XYZ'),
-                                ),
-                                // Ajoutez d'autres informations du profil de l'élève ici
-                              ],
+                    content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Center(
+                              child: Text(
+                            'Profil',
+                            textAlign: TextAlign.center,
+                          )),
+                          const Card(
+                            elevation: 5.0,
+                            margin: EdgeInsets.all(16.0),
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ListTile(
+                                    leading: Icon(Icons.person),
+                                    title: Text('Nom: John'),
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.person),
+                                    title: Text('Prénom: Doe'),
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.school),
+                                    title: Text('Classe: 5A'),
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.school),
+                                    title: Text('École: École XYZ'),
+                                  ),
+                                  // Ajoutez d'autres informations du profil de l'élève ici
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    continueStep();
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    elevation: 10.0,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.20,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        // color:
+                                        //     Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                // margin: const EdgeInsets
+                                                //         .only(
+                                                //     top: Dimensions
+                                                //         .MobileMargin),
+
+                                                height: 100,
+                                                width: 100,
+                                                child: Image.asset(
+                                                  'assets/images/scolarite.png',
+                                                  width: 50,
+                                                  height: 50,
+                                                ),
+                                              ),
+                                              // SizedBox(
+                                              //   height: Get
+                                              //           .height *
+                                              //       0.01,
+                                              // ),
+                                              Text(
+                                                'Scolarité',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.04,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                              GestureDetector(
+                                  onTap: () {
+                                    continueStep();
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    elevation: 10.0,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.20,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        // color:
+                                        //     Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                // margin: const EdgeInsets
+                                                //         .only(
+                                                //     top: Dimensions
+                                                //         .MobileMargin),
+
+                                                height: 100,
+                                                width: 100,
+                                                child: Image.asset(
+                                                  'assets/images/cantine.png',
+                                                  width: 50,
+                                                  height: 50,
+                                                ),
+                                              ),
+                                              // SizedBox(
+                                              //   height: Get
+                                              //           .height *
+                                              //       0.01,
+                                              // ),
+                                              Text(
+                                                'Cantine',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.04,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    continueStep();
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    elevation: 10.0,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.20,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        // color:
+                                        //     Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                // margin: const EdgeInsets
+                                                //         .only(
+                                                //     top: Dimensions
+                                                //         .MobileMargin),
+
+                                                height: 100,
+                                                width: 100,
+                                                child: Image.asset(
+                                                  'assets/images/transport.png',
+                                                  width: 50,
+                                                  height: 50,
+                                                ),
+                                              ),
+                                              // SizedBox(
+                                              //   height: Get
+                                              //           .height *
+                                              //       0.01,
+                                              // ),
+                                              Text(
+                                                'Transport',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.04,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                              GestureDetector(
+                                  onTap: () {
+                                    continueStep();
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    elevation: 10.0,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.20,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                        // color:
+                                        //     Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                // margin: const EdgeInsets
+                                                //         .only(
+                                                //     top: Dimensions
+                                                //         .MobileMargin),
+
+                                                height: 98,
+                                                width: 98,
+                                                child: Image.asset(
+                                                  'assets/images/sports.png',
+                                                  width: 70,
+                                                  height: 70,
+                                                ),
+                                              ),
+                                              // SizedBox(
+                                              //   height: Get
+                                              //           .height *
+                                              //       0.01,
+                                              // ),
+                                              Text(
+                                                'Extra Scolaire',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.04,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                            ],
+                          )
+                        ]),
                     isActive: currentStep >= 0,
                     state: currentStep >= 0
                         ? StepState.complete
@@ -281,7 +600,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
                       children: [
                         Center(
                           child: AutoSizeText(
-                            'Saisissez le montant'.toUpperCase(),
+                            'Saisissez le montant',
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
@@ -372,7 +691,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
                                         ),
                                       ),
                                       actions: <Widget>[
-                                        OutlinedButton(
+                                        TextButton(
                                           child: const Text("Annuler"),
                                           onPressed: () =>
                                               Navigator.pop(context),
@@ -394,10 +713,10 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
                               padding: const EdgeInsets.symmetric(vertical: 15),
                               child: ListTile(
                                 leading: Container(
-                                  height: 40,
-                                  width: 40,
+                                  height: 50,
+                                  width: 50,
                                   decoration: BoxDecoration(
-                                    color: Colors.amber,
+                                    // color: Colors.amber,
                                     borderRadius: BorderRadius.circular(20),
                                     image: const DecorationImage(
                                       image: AssetImage(
@@ -691,45 +1010,447 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
                   Step(
                     title: const Text(''),
                     content: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/mtn_momo.png'),
-                            radius: 30,
-                            backgroundColor: Colors.amber,
+                      child: SingleChildScrollView(
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                'Détails de la transaction',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              SizedBox(
+                                width: Get.width,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    //ecole
+                                    Card(
+                                      elevation: 5,
+                                      child: Container(
+                                        width: size.width,
+                                        margin: const EdgeInsets.only(
+                                          bottom: Dimensions.MobileMargin - 10,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: Dimensions.MobileMargin,
+                                          vertical:
+                                              Dimensions.MobileMargin - 10,
+                                        ),
+                                        decoration: const BoxDecoration(
+                                          // color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8.0)),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const AutoSizeText(
+                                              "ELEVE",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              minFontSize: 12,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.03,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "NOM:",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    // color: Colors.grey,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  "Bamba",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.015,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "PRÉNOM(S):",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    // color: Colors.grey,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  "Jean Marc",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.015,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "DATE DE NAISSANCE:",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    // color: Colors.grey,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  "28/10/2000",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.015,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "LIEU DE NAISSANCE:",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    // color: Colors.grey,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  "Abidjan",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.015,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "CLASSE:",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    // color: Colors.grey,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  "5ème",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.02,
+                                            ),
+                                            const Divider(
+                                              thickness: 1,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.02,
+                                            ),
+                                            const AutoSizeText(
+                                              "SERVICE",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                //
+                                              ),
+                                              minFontSize: 12,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.015,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "TYPE:",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    // color: Colors.grey,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  "Scolarité",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                            
+                                            SizedBox(
+                                              height: size.height * 0.015,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "MONTANT INITIAL:",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    // color: Colors.grey,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  "100.000 F",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.015,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "FRAIS TRANSACTION",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    // color: Colors.grey,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  // '${totalfrais}',
+                                                  // '$totalfrais F',
+                                                  '2000 F',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.015,
+                                            ),
+                                            const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AutoSizeText(
+                                                  "TOTAL A PAYER:",
+                                                  style: TextStyle(
+                                                    // color: Colors.grey,
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                  minFontSize: 10,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                AutoSizeText(
+                                                  "102.000 F",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  minFontSize: 8,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Paiement via MTN CI en cours ...",
-                            style: Theme.of(this.context).textTheme.titleSmall,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Nous avons juste besoin de votre confirmation",
-                            style: Theme.of(this.context).textTheme.bodySmall,
-                          ),
-                          SizedBox(
-                            height: height * 0.17,
-                          ),
-                          const CircularProgressIndicator(),
-                          SizedBox(
-                            height: height * 0.25,
-                          ),
-                          Text(
-                            "Veuillez composer le *133# pour valider votre\n paiement via MTN Mobile Money",
-                            style: Theme.of(this.context).textTheme.titleSmall,
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    )
+                    // content: Center(
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                    //     children: [
+                    //       const CircleAvatar(
+                    //         backgroundImage:
+                    //             AssetImage('assets/images/mtn_momo.png'),
+                    //         radius: 30,
+                    //         backgroundColor: Colors.amber,
+                    //       ),
+                    //       const SizedBox(
+                    //         height: 20,
+                    //       ),
+                    //       Text(
+                    //         "Paiement via MTN CI en cours ...",
+                    //         style: Theme.of(this.context).textTheme.titleSmall,
+                    //       ),
+                    //       const SizedBox(
+                    //         height: 20,
+                    //       ),
+                    //       Text(
+                    //         "Nous avons juste besoin de votre confirmation",
+                    //         style: Theme.of(this.context).textTheme.bodySmall,
+                    //       ),
+                    //       SizedBox(
+                    //         height: height * 0.17,
+                    //       ),
+                    //       const CircularProgressIndicator(),
+                    //       SizedBox(
+                    //         height: height * 0.25,
+                    //       ),
+                    //       Text(
+                    //         "Veuillez composer le *133# pour valider votre\n paiement via MTN Mobile Money",
+                    //         style: Theme.of(this.context).textTheme.titleSmall,
+                    //         textAlign: TextAlign.center,
+                    //       ),
+                    //     ],
+                    //   ),
+                    ,
                     isActive: currentStep >= 3,
                     state: currentStep >= 3
                         ? StepState.complete
