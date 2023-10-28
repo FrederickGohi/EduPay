@@ -8,7 +8,7 @@ import 'package:quickalert/quickalert.dart';
 
 import '../../api/api.dart';
 import '../../constantes/constantes.dart';
-import '../../models/user.dart';
+import '../../modelss/user.dart';
 import '../../mot_de_passe_oublier/ForgetPassword.dart';
 import '../../widgets/event_pref.dart';
 import '../../widgets/info_message.dart';

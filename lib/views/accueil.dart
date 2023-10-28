@@ -2,12 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:edupay/views/payment_processing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../constantes/constantes.dart';
 import '../widgets/custom_card_widget.dart';
-import 'operations.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key, this.schoolid});
@@ -60,40 +57,6 @@ class _AccueilState extends State<Accueil> {
     if (selectedDate != null) {
       updateDate(selectedDate);
     }
-  }
-
-  // void setBirthday() async {
-  //   DateTime? date = DateTime(1900);
-  //   FocusScope.of(context).requestFocus(
-  //     FocusNode(),
-  //   );
-  //   date = await showDatePicker(
-  //     initialEntryMode: DatePickerEntryMode.calendarOnly,
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(1900),
-  //     lastDate: DateTime.now(),
-  //     helpText: "ENTREZ UNE DATE",
-  //     errorFormatText: "Format invalide essayez avec: xx/xx/xxxx",
-  //     errorInvalidText: "",
-  //     fieldHintText: "xx/xx/xxxx",
-  //     fieldLabelText: "Entrez la date de naissance",
-  //   );
-  //   if (date != null) {
-  //     final DateFormat formatter = DateFormat('dd-MM-yyyy');
-  //     final String dateFormatted = formatter.format(date);
-  //     setState(() {
-  //       _naissanceController.text = dateFormatted;
-  //       isDate = true;
-  //     });
-  //   }
-  // }
-
-  void valider({required TextEditingController matricule}) async {
-    Get.to(() => Operation(
-          matricule: _matriculeController.text.trim().toString(),
-          naissance: _naissanceController.text,
-        ));
   }
 
   @override

@@ -427,7 +427,7 @@ class _ProfilPage extends State<ProfilPage> {
                       elevation: 8.0,
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => const PrivacyPolicy());
+                          // Get.to(() => const PrivacyPolicy());
                         },
                         child: Container(
                           margin: const EdgeInsets.all(8),

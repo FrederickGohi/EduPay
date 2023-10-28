@@ -21,13 +21,8 @@ Future<void> main() async {
   final themeJson = jsonDecode(themeStr);
   final theme = ThemeDecoder.decodeThemeData(themeJson)!;
 
-  final darkThemeStr = await rootBundle.loadString('assets/darktheme.json');
-  final darkThemeJson = jsonDecode(darkThemeStr);
-  final darkTheme = ThemeDecoder.decodeThemeData(darkThemeJson)!;
-
   runApp(MyApp(
     theme: theme,
-    darkTheme: darkTheme,
   ));
 
   // Request permission to receive notifications
@@ -63,16 +58,15 @@ void handleLink(String? link) {
 
 class MyApp extends StatelessWidget {
   final ThemeData theme;
-  final ThemeData darkTheme;
 
-  const MyApp({super.key, required this.theme, required this.darkTheme});
+  const MyApp({super.key, required this.theme});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: theme,
-      darkTheme: darkTheme,
+      // darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
           future: EventPref.getUser(),

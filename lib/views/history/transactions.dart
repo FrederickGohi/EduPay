@@ -6,10 +6,7 @@ import 'package:http/http.dart' as http;
 import '../../api/api.dart';
 import '../../constantes/constantes.dart';
 import '../../controllers/c_user.dart';
-import '../malia/emploidutemps.dart';
-import '../malia/examens_devoirs.dart';
-import '../malia/infos_prof.dart';
-import '../../models/paiements_details.dart';
+import '../../modelss/paiements_details.dart';
 import 'detail_transaction.dart';
 
 class Transactions extends StatefulWidget {

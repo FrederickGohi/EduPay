@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../api/api.dart';
 import '../../controllers/c_user.dart';
-import '../../models/paiements.dart';
+import '../../modelss/paiements.dart';
 import 'package:http/http.dart' as http;
 import 'transactions.dart';
 import 'package:shimmer/shimmer.dart';

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../models/user.dart';
+import '../modelss/user.dart';
 import '../widgets/event_pref.dart';
 
 class CUser extends GetxController {

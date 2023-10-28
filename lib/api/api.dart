@@ -1,5 +1,5 @@
 class Api {
-  static const _host = 'https://leaderacademy-pay.com/api/v1';
+  static const _host = 'https:///api/v1';
 
   static const _hostArticles = '$_host/articles';
   static const _hostecoles = '$_host/ecoles';

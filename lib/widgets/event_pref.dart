@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/user.dart';
+import '../modelss/user.dart';
 
 class EventPref {
   static Future<User?> getUser() async {

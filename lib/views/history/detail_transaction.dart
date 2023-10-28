@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../constantes/constantes.dart';
-import '../../models/paiements_details.dart';
-import '../operations.dart';
+import '../../modelss/paiements_details.dart';
 
 class DetailsTransaction extends StatefulWidget {
   final PaiementDetails? paiementDetails;
@@ -37,9 +36,6 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
       floatingActionButton: FloatingActionButton.extended(
         // backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
-          Get.to(() => Operation(
-              matricule: widget.paiementDetails!.matricule,
-              naissance: widget.paiementDetails!.dateNaissance));
         },
         label: const Text(
           'Nouveau Paiement',
