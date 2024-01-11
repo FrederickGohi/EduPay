@@ -6,6 +6,7 @@ class Matricule {
   String date_naissance;
   String lieu_naissance;
   String classe;
+  String telephone;
 
 
   // int idEcole;
@@ -18,7 +19,9 @@ class Matricule {
       required this.prenom,
       required this.date_naissance,
       required this.lieu_naissance,
+      // required this.idEcole,
       required this.classe,
+      required this.telephone,
 
       // required this.idClasse
       });
@@ -33,6 +36,7 @@ class Matricule {
         // idEcole: int.parse(json['id_ecole']),
         // idClasse: int.parse(json['id_classe']),
         classe: json['classe'],
+        telephone: json['telephone'],
 
       );
 
@@ -47,6 +51,7 @@ class Matricule {
         // 'idEcole': this.idEcole,
         // 'idClasse': this.idClasse,
         'classe': this.classe,
+        'telephone': this.telephone,
 
       };
 }

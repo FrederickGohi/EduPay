@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:edupay/views/payment_processing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../api/api.dart';
+import '../modelss/matricule.dart';
 import '../widgets/custom_card_widget.dart';
+import '../widgets/info_message.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key, this.schoolid});
@@ -21,43 +26,39 @@ class _AccueilState extends State<Accueil> {
 
   final _formKey = GlobalKey<FormState>();
 
-  void updateDate(DateTime newDate) {
-    final DateFormat formatter = DateFormat('dd-MM-yyyy');
-    final String dateFormatted = formatter.format(newDate);
-    setState(() {
-      _naissanceController.text = dateFormatted;
-    });
-  }
-
-  Future<void> setBirthday() async {
-    DateTime currentDate = DateTime.now();
-
-    FocusScope.of(context).requestFocus(FocusNode());
-
-    DateTime? selectedDate = await showCupertinoModalPopup<DateTime>(
-      context: context,
-      builder: (BuildContext builder) {
-        return Container(
-          color: Theme.of(context).canvasColor,
-          height: MediaQuery.of(context).size.height / 3,
-          child: CupertinoDatePicker(
-            mode: CupertinoDatePickerMode.date,
-            dateOrder: DatePickerDateOrder.dmy,
-            initialDateTime: currentDate,
-            minimumDate: DateTime(1900),
-            maximumDate: currentDate,
-            onDateTimeChanged: (DateTime newDateTime) {
-              updateDate(newDateTime);
-            },
-          ),
-        );
+  Future<List<Matricule>> getStudent(
+      var matricule, var idecole, var ecole) async {
+    List<Matricule> listMatricule = [];
+    var response = await http.post(
+      Uri.parse(Api.checkMatricule),
+      body: {
+        'matricule': matricule.toString(),
+        'id_ecole': idecole.toString(),
       },
     );
-
-    if (selectedDate != null) {
-      updateDate(selectedDate);
+    print(matricule);
+    if (response.statusCode == 200) {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
+      Get.back();
+      var responseBody = jsonDecode(response.body);
+      if (responseBody['success']) {
+        for (var element in (responseBody['data'] as List)) {
+          listMatricule.add(Matricule.fromJson(element));
+        }
+        Get.to(() => PaymentProcessing(
+            matricules: listMatricule, ecole: ecole, idecole: idecole));
+      } else {
+        InfoMessage.snackbar(
+            Get.context!, 'Matricule non identifié, veuillez rééssayer');
+      }
     }
+    return listMatricule;
   }
+
+  // void valider({required TextEditingController matricule}) async {
+  //   Get.to(() => const PaymentProcessing(matricules:null));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -153,10 +154,28 @@ class _AccueilState extends State<Accueil> {
                                     ),
                                     FilledButton(
                                         onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              });
+
                                           String matricule =
                                               matriculeController.text;
-                                          Get.to(
-                                              () => const PaymentProcessing());
+                                          var idecole = 1;
+                                          var ecole = "Université FHB";
+
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 1500), () {
+                                            // Navigator.of(context).pop();
+
+                                            getStudent(
+                                                matricule, idecole, ecole);
+                                          });
                                         },
                                         child: const Text('Rechercher')),
                                   ],
@@ -206,11 +225,29 @@ class _AccueilState extends State<Accueil> {
                                     ),
                                     FilledButton(
                                         onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              });
+
                                           String matricule =
                                               matriculeController.text;
-                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
-                                          Get.to(
-                                              () => const PaymentProcessing());
+                                          var idecole = 2;
+                                          var ecole =
+                                              "Université Nangui Abrogoua";
+
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 1500), () {
+                                            // Navigator.of(context).pop();
+
+                                            getStudent(
+                                                matricule, idecole, ecole);
+                                          });
                                         },
                                         child: const Text('Rechercher')),
                                   ],
@@ -260,11 +297,28 @@ class _AccueilState extends State<Accueil> {
                                     ),
                                     FilledButton(
                                         onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              });
+
                                           String matricule =
                                               matriculeController.text;
-                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
-                                          Get.to(
-                                              () => const PaymentProcessing());
+                                          var idecole = 3;
+                                          var ecole = "INPHB";
+
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 1500), () {
+                                            // Navigator.of(context).pop();
+
+                                            getStudent(
+                                                matricule, idecole, ecole);
+                                          });
                                         },
                                         child: const Text('Rechercher')),
                                   ],
@@ -314,11 +368,28 @@ class _AccueilState extends State<Accueil> {
                                     ),
                                     FilledButton(
                                         onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              });
+
                                           String matricule =
                                               matriculeController.text;
-                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
-                                          Get.to(
-                                              () => const PaymentProcessing());
+                                          var idecole = 4;
+                                          var ecole = "ESATIC";
+
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 1500), () {
+                                            // Navigator.of(context).pop();
+
+                                            getStudent(
+                                                matricule, idecole, ecole);
+                                          });
                                         },
                                         child: const Text('Rechercher')),
                                   ],
@@ -368,11 +439,28 @@ class _AccueilState extends State<Accueil> {
                                     ),
                                     FilledButton(
                                         onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              });
+
                                           String matricule =
                                               matriculeController.text;
-                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
-                                          Get.to(
-                                              () => const PaymentProcessing());
+                                          var idecole = 5;
+                                          var ecole = "Lycée Classique Abidjan";
+
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 1500), () {
+                                            // Navigator.of(context).pop();
+
+                                            getStudent(
+                                                matricule, idecole, ecole);
+                                          });
                                         },
                                         child: const Text('Rechercher')),
                                   ],
@@ -422,11 +510,28 @@ class _AccueilState extends State<Accueil> {
                                     ),
                                     FilledButton(
                                         onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              });
+
                                           String matricule =
                                               matriculeController.text;
-                                          // Faites quelque chose avec le matricule, par exemple, enregistrez-le ou effectuez une action
-                                          Get.to(
-                                              () => const PaymentProcessing());
+                                          var idecole = 6;
+                                          var ecole = "Collège Saint Viateur";
+
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 1500), () {
+                                            // Navigator.of(context).pop();
+
+                                            getStudent(
+                                                matricule, idecole, ecole);
+                                          });
                                         },
                                         child: const Text('Rechercher')),
                                   ],

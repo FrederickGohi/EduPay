@@ -58,7 +58,7 @@ class _HistoriqueState extends State<Historique> {
               automaticallyImplyLeading: false,
               
               title: const AutoSizeText(
-                'Historique',
+                'Transactions effectuées',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -267,11 +267,21 @@ class _HistoriqueState extends State<Historique> {
             ),
           );
         } else {
-          return Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.4),
-            child: const Center(child: Text('Vos récentes transactions apparaîtront ici')),
-          );
+          // return Padding(
+          //   padding: EdgeInsets.symmetric(
+          //       vertical: MediaQuery.of(context).size.height * 0.4),
+          //   child: const Center(child: Text('Vos récentes transactions apparaîtront ici')),
+          // );
+          return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/images/transactions.png'),
+                          const Text("Vos récentes transactions apparaîtront ici")
+                        ],
+                      ),
+                    );
         }
       },
     );

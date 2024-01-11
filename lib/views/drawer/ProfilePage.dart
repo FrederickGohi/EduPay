@@ -250,7 +250,7 @@ class _ProfilPage extends State<ProfilPage> {
                                     'Nom',
                                     style: Theme.of(this.context)
                                         .textTheme
-                                        .titleLarge,
+                                        .titleMedium,
                                   ),
                                   Text(
                                     _cUser.user.nom,
@@ -282,7 +282,7 @@ class _ProfilPage extends State<ProfilPage> {
                                     'Prénom(s)',
                                     style: Theme.of(this.context)
                                         .textTheme
-                                        .titleLarge,
+                                        .titleMedium,
                                   ),
                                   Text(
                                     _cUser.user.prenom,
@@ -314,7 +314,7 @@ class _ProfilPage extends State<ProfilPage> {
                                     'Email',
                                     style: Theme.of(this.context)
                                         .textTheme
-                                        .titleLarge,
+                                        .titleMedium,
                                   ),
                                   Text(
                                     _cUser.user.email,
@@ -337,7 +337,7 @@ class _ProfilPage extends State<ProfilPage> {
                                     'Contact',
                                     style: Theme.of(this.context)
                                         .textTheme
-                                        .titleLarge,
+                                        .titleMedium,
                                   ),
                                   Text(
                                     _cUser.user.telephone,
@@ -380,7 +380,7 @@ class _ProfilPage extends State<ProfilPage> {
                             title: Text(
                               'Support technique',
                               style:
-                                  Theme.of(this.context).textTheme.titleLarge,
+                                  Theme.of(this.context).textTheme.titleMedium,
                             ),
                             trailing: const Icon(Icons.chevron_right),
                           ),
@@ -413,7 +413,7 @@ class _ProfilPage extends State<ProfilPage> {
                             title: Text(
                               'Inviter un ami',
                               style:
-                                  Theme.of(this.context).textTheme.titleLarge,
+                                  Theme.of(this.context).textTheme.titleMedium,
                             ),
                             trailing: const Icon(Icons.chevron_right),
                           ),
@@ -446,7 +446,7 @@ class _ProfilPage extends State<ProfilPage> {
                             title: Text(
                               'Confidentialité',
                               style:
-                                  Theme.of(this.context).textTheme.titleLarge,
+                                  Theme.of(this.context).textTheme.titleMedium,
                             ),
                             trailing: const Icon(Icons.chevron_right),
                           ),
@@ -479,7 +479,7 @@ class _ProfilPage extends State<ProfilPage> {
                             title: Text(
                               'Supprimer mon compte',
                               style:
-                                  Theme.of(this.context).textTheme.titleLarge,
+                                  Theme.of(this.context).textTheme.titleMedium,
                             ),
                             trailing: const Icon(Icons.chevron_right),
                           ),
@@ -513,7 +513,7 @@ class _ProfilPage extends State<ProfilPage> {
                             title: Text(
                               'Déconnexion',
                               style:
-                                  Theme.of(this.context).textTheme.titleLarge,
+                                  Theme.of(this.context).textTheme.titleMedium,
                             ),
                             trailing: const Icon(Icons.chevron_right),
                           ),

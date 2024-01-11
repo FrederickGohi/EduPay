@@ -4,19 +4,19 @@ class PaiementDetails {
   int idUser;
   String nomParent;
   String email;
-  String schoolid;
+  String eleve;
   String nomEleve;
   String prenomEleve;
   String dateNaissance;
   String lieuNaissance;
   String classe;
-  String matricule;
   String ecole;
+  String matricule;
+  String modePaiement;
   int montantInitial;
   int fraisOperateur;
-  int fraisEdupay;
+  int fraisEliah;
   String montant;
-  String telephone;
   String reference;
   String dateTransaction;
   int statut;
@@ -28,19 +28,19 @@ class PaiementDetails {
       required this.idUser,
       required this.nomParent,
       required this.email,
-      required this.schoolid,
+      required this.eleve,
       required this.nomEleve,
       required this.prenomEleve,
       required this.dateNaissance,
       required this.lieuNaissance,
       required this.classe,
-      required this.matricule,
       required this.ecole,
+      required this.matricule,
+      required this.modePaiement,
       required this.montantInitial,
       required this.fraisOperateur,
-      required this.fraisEdupay,
+      required this.fraisEliah,
       required this.montant,
-      required this.telephone,
       required this.reference,
       required this.dateTransaction,
       required this.statut,
@@ -53,19 +53,19 @@ class PaiementDetails {
         idUser: int.parse(json['id_user']),
         nomParent: json['nom_parent'],
         email: json['email'],
-        schoolid: json['schoolid'],
+        eleve: json['eleve'],
         nomEleve: json['nom_eleve'],
         prenomEleve: json['prenom_eleve'],
         dateNaissance: json['date_naissance'],
         lieuNaissance: json['lieu_naissance'],
         classe: json['classe'],
-        matricule: json['matricule'],
         ecole: json['ecole'],
+        matricule: json['matricule'],
+        modePaiement: json['mode_paiement'],
         montantInitial: int.parse(json['montant_initial']),
         fraisOperateur: int.parse(json['frais_operateur']),
-        fraisEdupay: int.parse(json['frais_edupay']),
+        fraisEliah: int.parse(json['frais_eliah']),
         montant: json['montant'],
-        telephone: json['telephone'],
         reference: json['reference'],
         dateTransaction: json['date_transaction'],
         statut: int.parse(json['statut']),
@@ -78,19 +78,19 @@ class PaiementDetails {
         'id_user': idUser,
         'nomParent': nomParent,
         'email': email,
-        'schoolid': schoolid,
+        'eleve': eleve,
         'nomEleve': nomEleve,
         'penomEleve': prenomEleve,
         'dateNaissance': dateNaissance,
         'lieuNaissance': lieuNaissance,
         'classe': classe,
-        'matricule': matricule,
         'ecole': ecole,
+        'matricule': matricule,
+        'modePaiement': modePaiement,
         'montantInitial': montantInitial,
         'fraisOperateur': fraisOperateur,
-        'fraisEdupay': fraisEdupay,
+        'fraisEliah': fraisEliah,
         'montant': montant,
-        'telephone': telephone,
         'reference': reference,
         'dateTransaction': dateTransaction,
         'statut': statut,

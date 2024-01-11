@@ -30,18 +30,18 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
         widget.paiementDetails!.montant.replaceAll(RegExp(r"\s+"), ""));
     var total = widget.paiementDetails!.montantInitial +
         widget.paiementDetails!.fraisOperateur +
-        widget.paiementDetails!.fraisEliah;
+        widget.paiementDetails!.fraisEdupay;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        // backgroundColor: Theme.of(context).colorScheme.secondary,
-        onPressed: () {
-        },
-        label: const Text(
-          'Nouveau Paiement',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   // backgroundColor: Theme.of(context).colorScheme.secondary,
+      //   onPressed: () {
+      //   },
+      //   label: const Text(
+      //     'Nouveau Paiement',
+      //     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+      //   ),
+      // ),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Détails de la transaction"),
@@ -206,81 +206,7 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
                       const SizedBox(
                         height: 15,
                       ),
-                      const Divider(
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const AutoSizeText(
-                        "PARENT",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        minFontSize: 12,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.015,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const AutoSizeText(
-                            "NOM & PRENOM(S):",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            minFontSize: 10,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          AutoSizeText(
-                            widget.paiementDetails!.nomParent,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            minFontSize: 8,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.015,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const AutoSizeText(
-                            "EMAIL:",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            minFontSize: 10,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          AutoSizeText(
-                            widget.paiementDetails!.email,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            minFontSize: 8,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
+                     
                       const SizedBox(
                         height: 15,
                       ),
@@ -378,7 +304,7 @@ class _DetailsTransactionState extends State<DetailsTransaction> {
                           AutoSizeText(
                             // '${totalfrais}',
                             // '$totalfrais F',
-                            '${widget.paiementDetails!.fraisOperateur + widget.paiementDetails!.fraisEliah} F',
+                            '${widget.paiementDetails!.fraisOperateur + widget.paiementDetails!.fraisEdupay} F',
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 12,

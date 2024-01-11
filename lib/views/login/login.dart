@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
     Future.delayed(
       const Duration(seconds: 2),
       () => setState(() {
-        // isLoading = false;
+        isLoading = false;
         login();
       }),
     );
@@ -240,10 +240,10 @@ class _LoginState extends State<Login> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Get.offAll(() => const Root());
-                    // if (_formKey.currentState!.validate()) {
-                    //     isLoading ? null : _onSubmit();
-                    //   }
+                    // Get.offAll(() => const Root());
+                    if (_formKey.currentState!.validate()) {
+                        isLoading ? null : _onSubmit();
+                      }
                   },
                   style: ButtonStyle(
                     fixedSize: MaterialStateProperty.all(

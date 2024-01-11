@@ -1,5 +1,8 @@
 class Api {
-  static const _host = 'https:///api/v1';
+  static const _host = 'https://edupay.mricdigital.com/api/v1';
+
+  static const pay = 'https://edupay.mricdigital.com/OnlinePaymentService/add_payer';
+
 
   static const _hostArticles = '$_host/articles';
   static const _hostecoles = '$_host/ecoles';

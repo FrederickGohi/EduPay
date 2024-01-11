@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
+import '../../api/api.dart';
 import '../../controllers/c_user.dart';
 import '../../widgets/root.dart';
 import 'success.dart';
@@ -14,22 +18,71 @@ class AwaitWebhook extends StatefulWidget {
 
 class _AwaitWebhookState extends State<AwaitWebhook> {
   final _cUser = Get.put(CUser());
+  final int pollingInterval = 2;
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _startCountdown();
+      _startPolling();
     });
   }
 
-  void _startCountdown() {
-    // Démarrez un délai de 05 secondes pour la redirection
-    Future.delayed(const Duration(seconds: 5), () {
-      // Redirigez l'utilisateur vers la page Success
-      Get.off(() => const Success());
+  void _startPolling() {
+    // Arrêtez le timer s'il était déjà en cours
+    _timer?.cancel();
+    // Démarrez un nouveau timer
+    _timer = Timer.periodic(Duration(seconds: pollingInterval), (timer) {
+      _checkPaymentStatus();
+      _checkPayment();
     });
+  }
+
+  Future<void> _checkPayment() async {
+    print('_checkPayment');
+    try {
+      var response = await http.post(
+        Uri.parse("https://edupay.mricdigital.com/mtn_ci_webhook.php"),
+        body: {
+          // 'id_user': idUser,
+        },
+      );
+    } catch (e) {
+      // Gérez les erreurs lors de la requête HTTP
+      print('Erreur lors de la requête HTTP : $e');
+    }
+  }
+
+  Future<void> _checkPaymentStatus() async {
+    try {
+      var idUser = _cUser.user.id_user.toString();
+      print(idUser);
+      var response = await http.post(
+        Uri.parse(Api.getMtnCiWebhookStatus),
+        body: {
+          'id_user': idUser,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        inspect(response.body);
+        var responseBody = jsonDecode(response.body);
+        print(responseBody['paid']);
+        // Vérifiez si le paiement a réussi
+        if (responseBody['paid']) {
+          // Arrêtez le timer car le paiement a réussi
+          _timer?.cancel();
+
+          // Redirigez l'utilisateur vers la page de succès
+          Get.off(() => const Success());
+          print('redirection sur la page success');
+        }
+      }
+    } catch (e) {
+      // Gérez les erreurs lors de la requête HTTP
+      print('Erreur lors de la requête HTTP : $e');
+    }
   }
 
   @override
@@ -50,7 +103,8 @@ class _AwaitWebhookState extends State<AwaitWebhook> {
             },
             child: const Text('Annuler le paiement'),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           appBar: AppBar(
             title: const Text('Paiement en cours'),
           ),

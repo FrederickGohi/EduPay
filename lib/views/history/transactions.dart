@@ -124,7 +124,7 @@ class _TransactionsState extends State<Transactions>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      paiementdetails.eleve,
+                                      "${paiementdetails.prenomEleve } ${paiementdetails.nomEleve }",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.w900),
                                     ),
